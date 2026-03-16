@@ -25,6 +25,10 @@ public class UrlMapping {
     @ManyToOne()
     private User user;
 
+    private Long userId;
+
+    private LocalDateTime expiresAt;
+
     private LocalDateTime createdAt;
 }
 

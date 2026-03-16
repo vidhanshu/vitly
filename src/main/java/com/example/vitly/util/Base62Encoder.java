@@ -1,4 +1,4 @@
-package com.example.vitly.url;
+package com.example.vitly.util;
 
 public class Base62Encoder {
     private static final String BASE62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
