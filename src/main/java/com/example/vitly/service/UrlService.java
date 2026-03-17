@@ -19,9 +19,13 @@ public class UrlService {
         UrlMapping url = new UrlMapping();
         url.setLongUrl(longUrl);
         url.setCreatedAt(LocalDateTime.now());
-        urlRepository.save(url);
+        UrlMapping savedUrl = urlRepository.save(url);
 
-        return "TEMP"; // TODO: implement encoding
+        String shortCode = Base62Encoder.encode(savedUrl.getId());
+        savedUrl.setShortCode(shortCode);
+        urlRepository.save(savedUrl);
+
+        return shortCode;
     }
 
     public String getOriginalUrl(String shortCode) {

@@ -1,8 +1,12 @@
 package com.example.vitly.controller;
 
+import com.example.vitly.dto.CrateUrlRequest;
 import com.example.vitly.service.UrlService;
-import org.springframework.stereotype.Controller;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.io.IOException;
 
 @RestController
 public class UrlController {
@@ -13,12 +17,12 @@ public class UrlController {
     }
 
     @PostMapping("/shorten")
-    public String shortenUrl(String longUrl) {
-        return urlService.createShortUrl(longUrl);
+    public String shortenUrl(@RequestBody CrateUrlRequest dto) {
+        return urlService.createShortUrl(dto.getLongUrl());
     }
 
     @GetMapping("/{shortCode}")
-    public String redirect(@PathVariable String shortCode) {
-        return urlService.getOriginalUrl(shortCode);
+    public RedirectView redirect(@PathVariable String shortCode, HttpServletResponse res) {
+        return new RedirectView(urlService.getOriginalUrl(shortCode));
     }
 }
